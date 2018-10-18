@@ -1,7 +1,5 @@
 package com.dorokhina.coffee_machine.models;
 
-import java.util.Arrays;
-
 public class BrewingBoard {
 	private Cell[] cells = new Cell[6];
 	private int selectedIndex = -1;
@@ -11,14 +9,8 @@ public class BrewingBoard {
             cells[i] = new Cell();
     }
 
-    public void addIngredientTo(int boxIndex, Ingredient ingredient) {
-    	cells[boxIndex].addIngredient(ingredient);
-    }
-
-    public void cleanCell(int index) {
-        cells[index] = new Cell();
-        if (selectedIndex == index)
-            selectedIndex = -1;
+    public void addIngredientTo(int index, Ingredient ingredient) {
+        cells[index].addIngredient(ingredient);
     }
 
     public Cell[] getCells() {
@@ -30,10 +22,9 @@ public class BrewingBoard {
     }
 
     public void setSelectedIndex(int selectedIndex) {
-	    if (this.selectedIndex != -1)
-            cells[this.selectedIndex].setSelected(false);
+	    if (this.selectedIndex != -1 && cells[this.selectedIndex].getState() == CellState.SELECTED)
+	        cells[this.selectedIndex].setState(CellState.IDLE);
         this.selectedIndex = selectedIndex;
-        cells[selectedIndex].setSelected(true);
     }
 
     public boolean isAnySelected() {
@@ -48,8 +39,5 @@ public class BrewingBoard {
         return selectedIndex;
     }
 
-    public void updateProgress(int index, double progress) {
-	    cells[index].setProgress(progress);
-    }
 
 }
