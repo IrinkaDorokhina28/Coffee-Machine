@@ -64,7 +64,7 @@ public class TaskBoard extends Thread {
 		taskContainer.setPrefColumns(10);
 		taskContainer.setVgap(10);
 		taskContainer.setHgap(10);
-		taskContainer.setMinSize(1100, 60);
+		taskContainer.setMinSize(1100, 100);
 		return taskContainer;
 	}
 }

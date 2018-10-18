@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.*;
@@ -92,7 +94,7 @@ public class App extends Application {
         root.getChildren().add(createCells(brewingBoard));
         root.getChildren().add(createIngredientBoard());
 //		root.add(hb2, 1, 0);
-        return new Scene(root, 1200, 600);
+        return new Scene(root, 1200, 800);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	}
 
@@ -148,13 +150,25 @@ public class App extends Application {
 
         List<Node> tasks = new ArrayList<Node>();
         for (Ingredient ingredient: Ingredient.values()) {
-//            switch (ingredient) {
-//                case CUP :
-//                    HBox hb = new HBox(new Label(ingredient.name()));
-//                    break;
-//                case
-//            }
-            HBox hb = new HBox(new Label(ingredient.name()));
+            HBox hb = null;
+            switch (ingredient) {
+                case CUP :
+//                    hb = new HBox(new Label("", new ImageView(new Image(getClass().getResourceAsStream("cup_ingr.png")))));
+                    hb = new HBox(new Label("", new ImageView(new Image("cup_ingr.png"))));
+                    break;
+                case COFFEE:
+                    hb = new HBox(new Label("", new ImageView(new Image("coffee_ingr.jpg"))));
+                    break;
+                case MILK:
+                    hb = new HBox(new Label("", new ImageView("milk_ingr.jpg")));
+//                    HBox hb = new HBox(new Label(new ImageView(getClass().getResourceAsStream("/resources/milk_ingr.jpg"))));
+                    break;
+                case SUGAR:
+                    hb = new HBox(new Label("", new ImageView("sugar_ingr.jpg")));
+//                    HBox hb = new HBox(new Label(new ImageView(getClass().getResourceAsStream("/resources/sugar_ingr.jpg"))));
+                    break;
+            }
+          //  HBox hb = new HBox(new Label(ingredient.name()));
             hb.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
